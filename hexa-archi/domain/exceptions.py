@@ -1,0 +1,2 @@
+class TradeInEligibilityError(Exception):
+    pass
