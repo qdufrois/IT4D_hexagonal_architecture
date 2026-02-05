@@ -3,10 +3,13 @@ class GetAllowedCustomerView(View): # using Django View
     Only specific customers are allowed to do a trade-in
     """                 
     
-    def get(self, URL): 
+    def get(self, URL):
+        # customer interface logic
         curstomer_id = URL.split("/")[-1]
+        # data logic
         customer = Customer.objects.get(id=curstomer_id) # using Django ORM
 
+        # domain logic
         if customer.age < 18: 
             raise HTTP.forbidden("Customer is not an adult") 
         
@@ -16,6 +19,7 @@ class GetAllowedCustomerView(View): # using Django View
         if customer.owned_pet not in ["dog", "cat"]:
             raise HTTP.forbidden("Customer must have a dog or a cat")
 
+        # client interface again
         return CustomerSerializer(customer) # using Django Serializer
     
 
