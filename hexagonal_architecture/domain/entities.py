@@ -1,7 +1,16 @@
 from enum import StrEnum
 from uuid import UUID
 
-from hexagonal_architecture.domain.trade_in import TradeInDomainEntity
+
+class PetType(StrEnum):
+    DOG = "dog"
+    CAT = "cat"
+    BIRD = "bird"
+    GUINEA_PIG = "guinea_pig"
+
+
+class Pet:
+    type: PetType
 
 
 class Country(StrEnum):
@@ -17,9 +26,13 @@ class Country(StrEnum):
     DK = "DK"
 
 
-class Address(TradeInDomainEntity):
+class Address:
     id: UUID
     country: Country
 
-    def can_trade_in(self):
-        return self.country.value in ["US", "FR", "DE", "IT", "ES", "UK"]
+
+class Customer:
+    id: UUID
+    age: PositiveInt
+    address: Address
+    owned_pet: Pet

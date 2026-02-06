@@ -11,4 +11,8 @@ Data access logic: Django ORM
 Client interface logic:
 - checking if customer is allowed to do trade-in
 - else: raise HTTPForbiddenError with reason
+
+    Answer:
+    - input and output serializers
+    - Django view
 """
