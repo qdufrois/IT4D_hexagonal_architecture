@@ -21,6 +21,6 @@ class CustomerSerializer:
         )
 
 
-def get_customer(customer_id: int) -> CustomerInfo:
+def get_customer_from_database(customer_id: int) -> CustomerInfo:
     customer = CustomerRepository().get_customer(customer_id)
     return CustomerSerializer(customer).serialize()

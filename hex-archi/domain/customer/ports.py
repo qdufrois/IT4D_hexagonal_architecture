@@ -1,6 +1,7 @@
 from customer.entities import CustomerInfo
-from customer.adapters import get_customer
 
 
-def get_customer_info(customer_id: int) -> CustomerInfo:
-    return get_customer(customer_id)
+def get_customer(customer_id: int) -> CustomerInfo:
+    from adapters.queries import get_customer_from_database
+
+    return get_customer_from_database(customer_id)
