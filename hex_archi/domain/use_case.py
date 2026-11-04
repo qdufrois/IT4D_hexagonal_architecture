@@ -5,6 +5,9 @@ class CustomerNotAllowed(Exception):
     pass
 
 
+
+
+
 def validate_customer(customer: CustomerEntity):
     if customer.age < 18:
         raise CustomerNotAllowed("Customer is not an adult")

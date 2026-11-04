@@ -1,7 +1,12 @@
 from http.client import HTTPException
 
-from hex_archi.domain.entity import CustomerEntity
+from hex_archi.domain.ports import get_customer_port
 from hex_archi.domain.use_case import CustomerNotAllowed, validate_customer
+
+class GetCustomerResponse(BaseModel):
+    id: str
+    age: int
+    name: str
 
 
 @router.get("/customer/{customer_id}")
@@ -9,11 +14,14 @@ def get_customer(customer_id: str):
     """
     Get customer information by ID
     """
-    customer = get_customer(customer_id)
-    customer_entity = CustomerEntity(age=customer.age, address_id=customer.address_id, owned_pet=customer.owned_pet)
+    customer_entity = get_customer_port(customer_id)
     try:
         validate_customer(customer_entity)
     except CustomerNotAllowed as e:
         raise HTTPException(status_code=403, detail=str(e))
 
-    return CustomerSerializer(customer)
+    return GetCustomerResponse(
+        id=customer_id,
+        age=customer_entity.age,
+        name=customer_entity.name,
+    )

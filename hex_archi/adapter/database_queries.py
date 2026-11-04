@@ -18,11 +18,11 @@ class CustomerManager(Protocol):
 
 
 class DjangoCustomerRepository:
-    def __init__(self, customer_manager: CustomerManager) -> None:
-        self._customer_manager = customer_manager
+    # def __init__(self, customer_manager: CustomerManager) -> None:
+    #     self._customer_manager = customer_manager
 
     def get_by_id(self, customer_id: str) -> CustomerEntity:
-        customer = self._customer_manager.get(pk=customer_id)
+        customer =  Customer.object.get(id=customer_id) # here we would retrieve data using django orm
         return CustomerEntity(
             age=customer.age,
             address_country=customer.address.country,
