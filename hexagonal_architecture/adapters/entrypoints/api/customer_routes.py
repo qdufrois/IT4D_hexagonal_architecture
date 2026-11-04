@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 
+from hexagonal_architecture.adapters.repositories.customer_in_memory_repository import CustomerInMemoryRepository
 from hexagonal_architecture.domain.ports.customer_provider import CustomerProvider
 from hexagonal_architecture.domain.use_cases.get_customer import (
     CustomerNotEligible,
@@ -35,7 +36,7 @@ def router_get_trade_in_allowed_customer(
     try:
         customer = get_trade_in_allowed_customer(
             customer_id=customer_id,
-            customer_provider=customer_provider,
+            customer_provider=CustomerInMemoryRepository(),
         )
     except CustomerNotFound as exc:
         raise Http404CustomerNotFound(str(exc)) from exc
