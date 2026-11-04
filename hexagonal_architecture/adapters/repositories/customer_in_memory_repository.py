@@ -1,9 +1,11 @@
 
 
 
+from typing import Any
+
 from hexagonal_architecture.domain.entities.customer import Address, Customer
 
-DATA = {
+DATA: dict[str, Any] = {
     "1": {'id': '1', 'name': 'Mikel', 'age': 34, 'country_code': "ES", 'pet': 'dog'},
     "2": {'id': '2', 'name': 'Mess', 'age': 39, 'country_code': "AR", 'pet': None}
 }
@@ -15,7 +17,7 @@ class CustomerInMemoryRepository:
 
         customer_data = DATA.get(customer_id)
 
-        if customer_data is None :
+        if customer_data is None:
             return None
         
         return Customer(
